@@ -9,8 +9,8 @@ import {
 } from './utils.js';
 
 class App {
-  static DEFAULT_SEPARATOR = ',:';
-  static CUSTOM_SEPARATOR_REGEXP = /\/\/(.+)\\n/;
+  #DEFAULT_SEPARATOR = ',:';
+  #CUSTOM_SEPARATOR_REGEXP = /\/\/(.+)\\n/;
 
   async run() {
     const userInput = await readLineAsync();
@@ -31,14 +31,14 @@ class App {
   }
 
   getSeparator(str) {
-    const customSeparator = str.match(App.CUSTOM_SEPARATOR_REGEXP);
+    const customSeparator = str.match(this.#CUSTOM_SEPARATOR_REGEXP);
 
-    return customSeparator ? customSeparator[0] : App.DEFAULT_SEPARATOR;
+    return customSeparator ? customSeparator[0] : this.#DEFAULT_SEPARATOR;
   }
 
   extractContent(str) {
     return str
-      .replace(App.CUSTOM_SEPARATOR_REGEXP, '')
+      .replace(this.#CUSTOM_SEPARATOR_REGEXP, '')
       .replace(/^"|"$/g, '')
       .replace('\\\\', '\\');
   }
