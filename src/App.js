@@ -24,7 +24,7 @@ class App {
   /**
    *
    * @param {string} input
-   * @returns
+   * @returns {string[]}
    */
   processInput(input) {
     if (input === '') return []; // 빈 문자열은 예외로 0을 리턴한다.
@@ -39,7 +39,7 @@ class App {
   /**
    *
    * @param {string} str
-   * @returns
+   * @returns {RegExpMatchArray | string}
    */
   getDelimiter(str) {
     const customDelimiter = str.match(this.#CUSTOM_DELIMITER_REGEXP);
@@ -50,7 +50,7 @@ class App {
   /**
    *
    * @param {string} str
-   * @returns
+   * @returns {string}
    */
   extractContent(str) {
     return str
@@ -62,8 +62,8 @@ class App {
   /**
    *
    * @param {string} content
-   * @param {string} delimiter
-   * @returns
+   * @param {RegExpMatchArray | string} delimiter
+   * @returns {string[]}
    */
   splitContent(content, delimiter) {
     const delimiterRegExp = convertCharacterClassRegex(delimiter);
@@ -74,7 +74,7 @@ class App {
   /**
    *
    * @param {string[]} input
-   * @returns
+   * @returns {number}
    */
   calculateSum(input) {
     validatePositiveNumberArray(input);

@@ -4,7 +4,7 @@ import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants.js';
 
 /**
  *
- * @returns string
+ * @returns {Promise<string>}
  */
 export async function readLineAsync() {
   return await Console.readLineAsync(INPUT_INFO_MESSAGE);
@@ -13,6 +13,7 @@ export async function readLineAsync() {
 /**
  *
  * @param {string} str
+ * @returns {void}
  */
 export function printResult(str) {
   Console.print(`결과 : ${str}`);
@@ -21,7 +22,7 @@ export function printResult(str) {
 /**
  *
  * @param {string} str
- * @returns
+ * @returns {string}
  */
 export function stringifyToJSON(str) {
   return JSON.stringify(str);
@@ -30,7 +31,7 @@ export function stringifyToJSON(str) {
 /**
  *
  * @param {number[]} numberArray
- * @returns
+ * @returns {number}
  */
 export function sumArray(numberArray) {
   return numberArray.reduce((prev, cur) => prev + cur, 0);
@@ -39,6 +40,7 @@ export function sumArray(numberArray) {
 /**
  *
  * @param {any[]} array
+ * @throws {Error}
  */
 export function validatePositiveNumberArray(array) {
   if (!Array.isArray(array)) throw new Error(ERROR_MESSAGE);
@@ -50,7 +52,7 @@ export function validatePositiveNumberArray(array) {
 /**
  *
  * @param {unknown[]} array
- * @returns
+ * @returns {number[]}
  */
 export function convertNumberArray(array) {
   return array.map(it => Number(it));
@@ -58,8 +60,8 @@ export function convertNumberArray(array) {
 
 /**
  *
- * @param {string} delimiter
- * @returns
+ * @param {RegExpMatchArray | string} delimiter
+ * @returns {RegExp}
  */
 export function convertCharacterClassRegex(delimiter) {
   return new RegExp(`[${delimiter}]`);

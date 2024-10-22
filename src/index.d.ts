@@ -1,5 +1,5 @@
 declare module '@woowacourse/mission-utils' {
-  declare class Console {
+  class Console {
     static readLine(query: string, callback: (input: string) => void): void;
 
     static readLineAsync(query: string): Promise<string>;
