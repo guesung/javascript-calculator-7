@@ -1,5 +1,5 @@
 //@ts-check
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants.js';
 
 /**
@@ -7,7 +7,7 @@ import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants.js';
  * @returns string
  */
 export async function readLineAsync() {
-  return await MissionUtils.Console.readLineAsync(INPUT_INFO_MESSAGE);
+  return await Console.readLineAsync(INPUT_INFO_MESSAGE);
 }
 
 /**
@@ -15,7 +15,7 @@ export async function readLineAsync() {
  * @param {string} str
  */
 export function printResult(str) {
-  MissionUtils.Console.print(`결과 : ${str}`);
+  Console.print(`결과 : ${str}`);
 }
 
 /**
