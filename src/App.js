@@ -10,8 +10,8 @@ import {
 } from './utils.js';
 
 class App {
-  #DEFAULT_SEPARATOR = ',:';
-  #CUSTOM_SEPARATOR_REGEXP = /\/\/(.+)\\n/;
+  #DEFAULT_DELIMITER = ',:';
+  #CUSTOM_DELIMITER_REGEXP = /\/\/(.+)\\n/;
 
   async run() {
     const userInput = await readLineAsync();
@@ -30,10 +30,10 @@ class App {
     if (input === '') return []; // 빈 문자열은 예외로 0을 리턴한다.
 
     const stringified = stringifyToJSON(input);
-    const separator = this.getSeparator(stringified);
+    const delimiter = this.getDelimiter(stringified);
     const content = this.extractContent(stringified);
 
-    return this.splitContent(content, separator);
+    return this.splitContent(content, delimiter);
   }
 
   /**
@@ -41,10 +41,10 @@ class App {
    * @param {string} str
    * @returns
    */
-  getSeparator(str) {
-    const customSeparator = str.match(this.#CUSTOM_SEPARATOR_REGEXP);
+  getDelimiter(str) {
+    const customDelimiter = str.match(this.#CUSTOM_DELIMITER_REGEXP);
 
-    return customSeparator ? customSeparator[0] : this.#DEFAULT_SEPARATOR;
+    return customDelimiter ? customDelimiter[0] : this.#DEFAULT_DELIMITER;
   }
 
   /**
@@ -54,7 +54,7 @@ class App {
    */
   extractContent(str) {
     return str
-      .replace(this.#CUSTOM_SEPARATOR_REGEXP, '')
+      .replace(this.#CUSTOM_DELIMITER_REGEXP, '')
       .replace(/^"|"$/g, '')
       .replace('\\\\', '\\');
   }
@@ -62,13 +62,13 @@ class App {
   /**
    *
    * @param {string} content
-   * @param {string} separator
+   * @param {string} delimiter
    * @returns
    */
-  splitContent(content, separator) {
-    const separatorRegExp = convertCharacterClassRegex(separator);
+  splitContent(content, delimiter) {
+    const delimiterRegExp = convertCharacterClassRegex(delimiter);
 
-    return content.split(separatorRegExp);
+    return content.split(delimiterRegExp);
   }
 
   /**

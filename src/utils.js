@@ -58,9 +58,9 @@ export function convertNumberArray(array) {
 
 /**
  *
- * @param {string} separator
+ * @param {string} delimiter
  * @returns
  */
-export function convertCharacterClassRegex(separator) {
-  return new RegExp(`[${separator}]`);
+export function convertCharacterClassRegex(delimiter) {
+  return new RegExp(`[${delimiter}]`);
 }
