@@ -1,3 +1,4 @@
+//@ts-check
 import {
   stringifyToJSON,
   readLineAsync,
@@ -20,6 +21,11 @@ class App {
     printResult(sum);
   }
 
+  /**
+   *
+   * @param {string} input
+   * @returns
+   */
   processInput(input) {
     if (input === '') return []; // 빈 문자열은 예외로 0을 리턴한다.
 
@@ -30,12 +36,22 @@ class App {
     return this.splitContent(content, separator);
   }
 
+  /**
+   *
+   * @param {string} str
+   * @returns
+   */
   getSeparator(str) {
     const customSeparator = str.match(this.#CUSTOM_SEPARATOR_REGEXP);
 
     return customSeparator ? customSeparator[0] : this.#DEFAULT_SEPARATOR;
   }
 
+  /**
+   *
+   * @param {string} str
+   * @returns
+   */
   extractContent(str) {
     return str
       .replace(this.#CUSTOM_SEPARATOR_REGEXP, '')
@@ -43,12 +59,23 @@ class App {
       .replace('\\\\', '\\');
   }
 
+  /**
+   *
+   * @param {string} content
+   * @param {string} separator
+   * @returns
+   */
   splitContent(content, separator) {
     const separatorRegExp = convertCharacterClassRegex(separator);
 
     return content.split(separatorRegExp);
   }
 
+  /**
+   *
+   * @param {string[]} input
+   * @returns
+   */
   calculateSum(input) {
     validatePositiveNumberArray(input);
     const numberArray = convertNumberArray(input);
