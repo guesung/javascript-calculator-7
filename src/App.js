@@ -18,7 +18,7 @@ class App {
     const processedInput = this.processInput(userInput);
     const sum = this.calculateSum(processedInput);
 
-    printResult(sum);
+    printResult(String(sum));
   }
 
   /**
