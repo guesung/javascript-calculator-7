@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants.js';
 
@@ -7,7 +7,8 @@ import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants.js';
  * @returns {Promise<string>}
  */
 export async function readLineAsync() {
-  return await Console.readLineAsync(INPUT_INFO_MESSAGE);
+  const response = await Console.readLineAsync(INPUT_INFO_MESSAGE);
+  return response;
 }
 
 /**
@@ -44,9 +45,9 @@ export function sumArray(numberArray) {
  */
 export function validatePositiveNumberArray(array) {
   if (!Array.isArray(array)) throw new Error(ERROR_MESSAGE);
-  for (const item of array) {
+  array.forEach(item => {
     if (isNaN(item) || Number(item) <= 0) throw new Error(ERROR_MESSAGE);
-  }
+  });
 }
 
 /**
