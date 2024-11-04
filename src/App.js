@@ -15,25 +15,26 @@ class App {
   async run() {
     const userInput = await readLineAsync();
     const processedInput = this.processInput(userInput);
-    const sum = this.calculateSum(processedInput);
+    const sum = App.#calculateSum(processedInput);
 
     printResult(String(sum));
   }
 
   processInput(input) {
-    if (input === '') return []; // 빈 문자열은 예외로 0을 리턴한다.
+    if (input === '') return [];
 
     const stringified = stringifyToJSON(input);
     const delimiter = this.getDelimiter(stringified);
     const content = this.extractContent(stringified);
 
-    return this.splitContent(content, delimiter);
+    return App.#splitContent(content, delimiter);
   }
 
   getDelimiter(str) {
     const customDelimiter = str.match(this.#CUSTOM_DELIMITER_REGEXP);
 
-    return customDelimiter ? customDelimiter[0] : this.#DEFAULT_DELIMITER;
+    if (customDelimiter) return customDelimiter[0];
+    return this.#DEFAULT_DELIMITER;
   }
 
   extractContent(str) {
@@ -43,13 +44,13 @@ class App {
       .replace('\\\\', '\\');
   }
 
-  splitContent(content, delimiter) {
+  static #splitContent(content, delimiter) {
     const delimiterRegExp = convertCharacterClassRegex(delimiter);
 
     return content.split(delimiterRegExp);
   }
 
-  calculateSum(input) {
+  static #calculateSum(input) {
     validatePositiveNumberArray(input);
     const numberArray = convertNumberArray(input);
 
