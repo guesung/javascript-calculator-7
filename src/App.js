@@ -1,4 +1,5 @@
 import InputControllers from './controllers/InputControllers.js';
+import OutputController from './controllers/OutputController.js';
 import {
   convertNumberArray,
   printResult,
@@ -12,7 +13,7 @@ class App {
 
     const sum = App.#calculateSum(userInput);
 
-    printResult(String(sum));
+    OutputController.printResult(sum);
   }
 
   static #calculateSum(input) {
