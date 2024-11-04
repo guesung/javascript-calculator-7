@@ -1,4 +1,3 @@
-//@ts-check
 import {
   stringifyToJSON,
   readLineAsync,
@@ -21,11 +20,6 @@ class App {
     printResult(String(sum));
   }
 
-  /**
-   *
-   * @param {string} input
-   * @returns {string[]}
-   */
   processInput(input) {
     if (input === '') return []; // 빈 문자열은 예외로 0을 리턴한다.
 
@@ -36,22 +30,12 @@ class App {
     return this.splitContent(content, delimiter);
   }
 
-  /**
-   *
-   * @param {string} str
-   * @returns {RegExpMatchArray | string}
-   */
   getDelimiter(str) {
     const customDelimiter = str.match(this.#CUSTOM_DELIMITER_REGEXP);
 
     return customDelimiter ? customDelimiter[0] : this.#DEFAULT_DELIMITER;
   }
 
-  /**
-   *
-   * @param {string} str
-   * @returns {string}
-   */
   extractContent(str) {
     return str
       .replace(this.#CUSTOM_DELIMITER_REGEXP, '')
@@ -59,23 +43,12 @@ class App {
       .replace('\\\\', '\\');
   }
 
-  /**
-   *
-   * @param {string} content
-   * @param {RegExpMatchArray | string} delimiter
-   * @returns {string[]}
-   */
   splitContent(content, delimiter) {
     const delimiterRegExp = convertCharacterClassRegex(delimiter);
 
     return content.split(delimiterRegExp);
   }
 
-  /**
-   *
-   * @param {string[]} input
-   * @returns {number}
-   */
   calculateSum(input) {
     validatePositiveNumberArray(input);
     const numberArray = convertNumberArray(input);
