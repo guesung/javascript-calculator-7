@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from '../constants';
 import {
   convertCharacterClassRegex,
   readLineAsync,
@@ -10,11 +11,12 @@ class InputControllers {
 
   static async getUserInput() {
     const rawUserInput = await readLineAsync();
-    const userInput = this.parseInput(rawUserInput);
+    const userInput = this.#parseInput(rawUserInput);
+    this.#validatePositiveNumberArray(userInput);
     return userInput;
   }
 
-  static parseInput(input) {
+  static #parseInput(input) {
     if (input === '') return [];
 
     const stringified = stringifyToJSON(input);
@@ -42,6 +44,13 @@ class InputControllers {
     const delimiterRegExp = convertCharacterClassRegex(delimiter);
 
     return content.split(delimiterRegExp);
+  }
+
+  static #validatePositiveNumberArray(array) {
+    if (!Array.isArray(array)) throw new Error(ERROR_MESSAGE);
+    array.forEach((item) => {
+      if (isNaN(item) || Number(item) <= 0) throw new Error(ERROR_MESSAGE);
+    });
   }
 }
 
