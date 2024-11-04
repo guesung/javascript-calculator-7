@@ -1,26 +1,14 @@
+import Calculator from './Calculator.js';
 import InputControllers from './controllers/InputControllers.js';
 import OutputController from './controllers/OutputController.js';
-import {
-  convertNumberArray,
-  printResult,
-  sumArray,
-  validatePositiveNumberArray,
-} from './utils.js';
 
 class App {
   async run() {
     const userInput = await InputControllers.getUserInput();
 
-    const sum = App.#calculateSum(userInput);
+    const sum = Calculator.calculateSum(userInput);
 
     OutputController.printResult(sum);
-  }
-
-  static #calculateSum(input) {
-    validatePositiveNumberArray(input);
-    const numberArray = convertNumberArray(input);
-
-    return sumArray(numberArray);
   }
 }
 
